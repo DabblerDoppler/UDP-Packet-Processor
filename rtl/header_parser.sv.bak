@@ -131,10 +131,10 @@ module header_parser (
                 stream_last   = in_last;
             end
             default: begin
-                stream_data  = 256'b0;
-                stream_keep  = 32'b0;
+                stream_data = 256'b0;
+                stream_keep = 32'b0;
                 stream_valid = 1'b0;
-                stream_last  = 1'b0;
+                stream_last = 1'b0;
             end
         endcase
     end

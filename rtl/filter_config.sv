@@ -33,7 +33,7 @@ module filter_config (
             ip_protocol    <= 8'h11;
             ip_base        <= 32'h0A000100;
             ip_mask        <= 32'hFFFFFFFC;
-            udp_dst_port   <= 16'd25565;;
+            udp_dst_port   <= 16'd25565;
         end else if (cfg_we) begin
             case (cfg_waddr)
                 4'h0: mac_lo         <= cfg_wdata;

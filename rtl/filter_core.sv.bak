@@ -34,8 +34,6 @@ module filter_core(
     logic [7:0] ip_protocol, cfg_ip_protocol;
     logic [31:0] ip_dest;
 
-    logic [15:0] dest_port, cfg_dest_port;
-
     filter_config my_configuration (.clk, .rst_n, 
     .cfg_we, .cfg_waddr, .cfg_wdata, .cfg_raddr, .cfg_rdata, 
     .local_mac(cfg_local_mac), .ethertype(cfg_ethertype), 
