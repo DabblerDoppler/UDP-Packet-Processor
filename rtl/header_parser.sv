@@ -1,28 +1,27 @@
-const logic [5:0] HEADER_SIZE = 42;
-
 module header_parser (
     input  logic         clk,
     input  logic         rst_n,
 
-    // AXI-Stream style input interface
-    input  logic  [255:0]  in_data,
+    // AXI-Stream style input interface (LSB-first notation)
+    input  logic  [0:255]  in_data,
     input  logic  [31:0]   in_keep,
     input  logic           in_valid,
     input  logic           in_last,
 
-    // Output: raw UDP payload stream
-    output logic  [255:0]  out_data,
-    output  logic  [31:0]  out_keep,
+    // Output: raw UDP payload stream (LSB-first notation)
+    output logic  [0:255]  out_data,
+    output logic  [0:31]   out_keep,
     output logic           out_valid,
     output logic           out_last,
 
-    output logic timestamp_valid,
-    //The time (in clock cycles) since we received the last packet
-    output logic [31:0] timestamp,
+    output logic           timestamp_valid,
+    // The time (in clock cycles) since we received the last packet
+    output logic  [31:0]   timestamp,
 
-    input logic  out_ready,
-    output logic in_ready
+    input  logic           out_ready,
+    output logic           in_ready
 );
+    localparam [5:0] HEADER_SIZE = 42;
 
     typedef enum logic[1:0] {
         IDLE, 
@@ -31,117 +30,19 @@ module header_parser (
     } parse_state;
 
     parse_state state;
-    logic [511:0] packet_buffer;
+    logic [0:511] packet_buffer;  // LSB-first notation for AXI Stream
     logic [5:0]   valid_bytes;
-    logic prev_buffer_valid;
-    logic buffer_valid;
+    logic [6:0] final_valid_bytes;
+    logic         prev_buffer_valid;
+    logic         buffer_valid;
 
-    logic[31:0] cycle_count, packet_start_timestamp;
+    logic [31:0]  cycle_count, packet_start_timestamp;
 
     cycle_counter timestamper(.clk, .rst_n, .cycle_count);
 
-
-    always @(posedge_ff or negedge rst_n) begin
-        if(~rst_n) begin
-            state <= IDLE;
-            valid_bytes <= 1'b0;
-            packet_buffer <= 1'b0;
-            prev_buffer_valid <= 1'b0;
-            buffer_valid <= 1'b0;
-            packet_start_timestamp <= 32'b0;
-            timestamp_valid <= 1'b0;
-        end else begin
-            case (state)
-                IDLE: begin
-                    timestamp_valid <= 0;
-                    if(in_valid && in_ready) begin
-                        packet_start_timestamp <= cycle_count;
-                        packet_buffer[511:256] <= in_data;
-                        valid_bytes <= popcount32(in_keep);
-                        prev_buffer_valid <= in_valid;
-                        state <= PARSE_HEADER;
-                    end 
-                end
-                PARSE_HEADER: begin
-                    //these are blocking statements intentionally - it allows us to skip a 
-                    //clock cycle of latency and start parsing immediately.
-                    packet_buffer[255:0] = in_data;
-                    buffer_valid = prev_buffer_valid && in_valid && (valid_bytes + popcount32(in_keep) >= HEADER_SIZE);
-
-                    valid_bytes <= valid_bytes + popcount32(in_keep);
-                    //if we have a full valid header, start parsing the payload. 
-                    if(header_valid) begin
-                        packet_buffer <= 1'b0;
-                        valid_bytes <= 1'b0;
-                        prev_buffer_valid <= 1'b0;
-                        buffer_valid <= 1'b0;
-                        state     <= STREAM_PAYLOAD;
-                    //Otherwise, our input data is too corrupted. We've recieved 2 words
-                    //and still don't have a complete header, so we flush the buffer and 
-                    //return to listening. 
-                    //This is pretty aggressive, but for our use case, we don't want to get
-                    //stuck on a bad input source while other packets are trying to be sent,
-                    //so this is a deliberate design choice for HFT.
-                    //It also lets us get away with simple buffer logic rather than a proper FIFO
-                    //which helps to minimize latency.
-                    end else begin
-                        packet_buffer <= 1'b0;
-                        valid_bytes <= 1'b0;
-                        prev_buffer_valid <= 1'b0;
-                        buffer_valid <= 1'b0;
-                        state <= IDLE;
-                    end
-                end
-                STREAM_PAYLOAD: begin
-                    if(in_last) begin
-                        state <= IDLE;
-                        timestamp_valid <= 1'b1;
-                        timestamp <= cycle_count - packet_start_timestamp;
-                    end
-                end
-            endcase
-        end
-    end
-
-    always_comb begin
-        case (state) 
-            IDLE: begin
-                stream_data  = 256'b0;
-                stream_keep  = 32'b0;
-                stream_valid = 1'b0;
-                stream_last  = 1'b0;
-            end
-            PARSE_HEADER: begin
-                if(header_valid) begin
-                    stream_data  = {80'b0, packet_buffer[175:0]};
-                    stream_keep  = 32'h00_3F_FF_FF & in_keep;
-                    stream_valid = in_valid;
-                    stream_last  = 1'b0;
-                end else begin
-                    stream_data  = 256'b0;
-                    stream_keep  = 32'b0;
-                    stream_valid = 1'b0;
-                    stream_last  = 1'b0;
-                end
-            end
-            STREAM_PAYLOAD: begin
-                stream_data   = in_data;
-                stream_keep   = in_keep;
-                stream_valid  = in_valid;
-                stream_last   = in_last;
-            end
-            default: begin
-                stream_data  = 256'b0;
-                stream_keep  = 32'b0;
-                stream_valid = 1'b0;
-                stream_last  = 1'b0;
-            end
-        endcase
-    end
-
-    logic fifo_wr_en, fifo_rd_en, fifo_full, fifo_empty, bypass_fifo, fifo_valid;
-    logic [255:0] stream_data, fifo_data;
-    logic [31:0]  stream_keep, fifo_keep;
+    logic         fifo_wr_en, fifo_rd_en, fifo_full, fifo_empty, bypass_fifo, fifo_valid;
+    logic [0:255] stream_data, fifo_data, last_data_in;  // LSB-first notation
+    logic [0:31]  stream_keep, fifo_keep;  // LSB-first notation
     logic         stream_last, fifo_last, stream_valid, bypass_valid;
 
     fifo payload_fifo (
@@ -164,7 +65,7 @@ module header_parser (
     );
 
     assign bypass_fifo = in_valid && out_ready && fifo_empty;
-    assign fifo_valid   = ~fifo_empty;
+    assign fifo_valid  = ~fifo_empty;
 
     assign out_data  = bypass_fifo ? stream_data : fifo_data;
     assign out_keep  = bypass_fifo ? stream_keep : fifo_keep;
@@ -172,53 +73,145 @@ module header_parser (
     
     assign out_valid = bypass_fifo ? stream_valid : fifo_valid;
 
-    assign in_ready = bypass_fifo ? out_ready : !fifo_full;
+    assign in_ready  = bypass_fifo ? out_ready : !fifo_full;
 
     assign fifo_wr_en = ~bypass_fifo && stream_valid;
     assign fifo_rd_en = out_ready && fifo_valid && ~bypass_fifo;
 
-
-    logic filters_valid, header_valid;
-    logic cfg_we;
-    logic [3:0] cfg_waddr, cfg_raddr;
+    logic        filters_valid, header_valid;
+    logic        cfg_we;
+    logic [3:0]  cfg_waddr, cfg_raddr;
     logic [31:0] cfg_wdata, cfg_rdata;
 
+    filter_core my_filter_core(
+        .clk, 
+        .rst_n, 
+        .data(packet_buffer), 
+        .cfg_we, 
+        .cfg_waddr, 
+        .cfg_wdata, 
+        .cfg_raddr, 
+        .cfg_rdata, 
+        .filters_valid
+    );
 
-    filter_core my_filter_core(.clk, .rst_n, .data(packet_buffer), 
-    .cfg_we, .cfg_waddr, .cfg_wdata, .cfg_raddr, .cfg_rdata, .filters_valid);
-
-    //If in_last is high in the header stage, our packet is malformed so we should drop it.
+    // If in_last is high in the header stage, our packet is malformed so we should drop it.
     assign header_valid = filters_valid && buffer_valid && ~in_last;
 
+    always_ff @(posedge clk or negedge rst_n) begin
+        if(~rst_n) begin
+            state                  <= IDLE;
+            valid_bytes            <= 6'b0;
+            prev_buffer_valid      <= 1'b0;
+            last_data_in           <= 256'b0;
+            packet_start_timestamp <= 32'b0;
+            timestamp_valid        <= 1'b0;
+        end else begin
+            case (state)
+                IDLE: begin
+                    timestamp_valid <= 1'b0;
+                    if(in_valid && in_ready) begin
+                        last_data_in           <= in_data;
+                        packet_start_timestamp <= cycle_count;
+                        valid_bytes            <= popcount32(in_keep);
+                        prev_buffer_valid      <= in_valid;
+                        state                  <= PARSE_HEADER;
+                    end 
+                end
+                PARSE_HEADER: begin
+                    // These are blocking statements intentionally - it allows us to skip a 
+                    // clock cycle of latency and start parsing immediately.
+                    valid_bytes <= valid_bytes + popcount32(in_keep);
+                    // If we have a full valid header, start parsing the payload. 
+                    if(header_valid) begin
+                        valid_bytes       <= 6'b0;
+                        prev_buffer_valid <= 1'b0;
+                        state             <= STREAM_PAYLOAD;
+                    // Otherwise, our input data is too corrupted. We've received 2 words
+                    // and still don't have a complete header, so we flush the buffer and 
+                    // return to listening. 
+                    end else begin
+                        valid_bytes       <= 6'b0;
+                        prev_buffer_valid <= 1'b0;
+                        state             <= IDLE;
+                    end
+                end
+                STREAM_PAYLOAD: begin
+                    if(in_last) begin
+                        state           <= IDLE;
+                        timestamp_valid <= 1'b1;
+                        timestamp       <= cycle_count - packet_start_timestamp;
+                    end
+                end
+            endcase
+        end
+    end
 
+    assign packet_buffer[256:511] = last_data_in;
 
-    input logic rst_n,
+    assign final_valid_bytes = valid_bytes + popcount32(in_keep);
 
-    input axi_stream axi,
+    always_comb begin
+        case (state) 
+            IDLE: begin
+                // First 256 bits contain Ethernet header + start of IP header
+                packet_buffer[0:255] = 256'b0;
+                buffer_valid           = 1'b0;
+                stream_data            = 256'b0;
+                stream_keep            = 32'b0;
+                stream_valid           = 1'b0;
+                stream_last            = 1'b0;
+            end
+            PARSE_HEADER: begin
+                // Second 256 bits contain rest of IP header + UDP header + start of payload
+                packet_buffer[0:255] = in_data;
+                buffer_valid = prev_buffer_valid && in_valid && 
+                              (final_valid_bytes >= HEADER_SIZE);
+                if(header_valid) begin
+                    // Pass the complete packet
+                    stream_data  = in_data;
+                    // Send only the start of the packet and not the header
+                    // We still need to respect in_keep though, so we use this mask.
+                    stream_keep  = 32'h00_00_03_FF & in_keep;
+                    stream_valid = in_valid;
+                    stream_last  = 1'b0;
+                end else begin
+                    stream_data  = 256'b0;
+                    stream_keep  = 32'b0;
+                    stream_valid = 1'b0;
+                    stream_last  = 1'b0;
+                end
+            end
+            STREAM_PAYLOAD: begin
+                packet_buffer[0:255] = 256'b0;
+                buffer_valid           = 1'b0;
+                stream_data            = in_data;
+                stream_keep            = in_keep;
+                stream_valid           = in_valid;
+                stream_last            = in_last;
+            end
+            default: begin
+                packet_buffer[0:255] = 256'b0;
+                buffer_valid           = 1'b0;
+                stream_data            = 256'b0;
+                stream_keep            = 32'b0;
+                stream_valid           = 1'b0;
+                stream_last            = 1'b0;
+            end
+        endcase
+    end
 
-    output logic eth_valid,
-    //EtherType is 2 bytes
-    output logic [15:0] ethertype;
-    output logic [47:0] source_mac;
-    output logic [47:0] dest_mac;
-
-
-function automatic [5:0] popcount32(input logic [31:0] x);
-    popcount32 = 
-        x[0]  + x[1]  + x[2]  + x[3]  +
-        x[4]  + x[5]  + x[6]  + x[7]  +
-        x[8]  + x[9]  + x[10] + x[11] +
-        x[12] + x[13] + x[14] + x[15] +
-        x[16] + x[17] + x[18] + x[19] +
-        x[20] + x[21] + x[22] + x[23] +
-        x[24] + x[25] + x[26] + x[27] +
-        x[28] + x[29] + x[30] + x[31];
-endfunction
-
-always_comb begin
-    valid_bytes = popcount32(in_keep);
-end
-
+    function automatic [5:0] popcount32(input logic [31:0] x);
+        popcount32 = 
+            x[0]  + x[1]  + x[2]  + x[3]  +
+            x[4]  + x[5]  + x[6]  + x[7]  +
+            x[8]  + x[9]  + x[10] + x[11] +
+            x[12] + x[13] + x[14] + x[15] +
+            x[16] + x[17] + x[18] + x[19] +
+            x[20] + x[21] + x[22] + x[23] +
+            x[24] + x[25] + x[26] + x[27] +
+            x[28] + x[29] + x[30] + x[31];
+    endfunction
 
 endmodule
 
@@ -242,7 +235,10 @@ module header_parser_testbench;
     logic             out_valid;
     logic             out_last;
     logic [31:0]      timestamp;
+    logic             timestamp_valid;
     logic             in_ready;
+
+
 
     // Instantiate DUT
     header_parser dut (
@@ -257,6 +253,7 @@ module header_parser_testbench;
         .out_valid,
         .out_last,
         .timestamp,
+        .timestamp_valid,
         .in_ready,
         .out_ready
     );
@@ -264,99 +261,135 @@ module header_parser_testbench;
     // Clock generation
     always #5 clk = ~clk;
 
+    typedef struct packed {
+        logic [2047:0] data;
+        logic [7:0]    byte_len;
+    } test_packet_struct;
+
+    test_packet_struct test_packets [0:6];
+
+    initial begin
+        // Matching packet
+        test_packets[0].data = {
+            // payload (32 B of random data) – highest‐order bytes in this concat
+            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            // UDP header bytes 34–41
+            , 8'h00                // checksum LSB
+            , 8'h00                // checksum MSB
+            , 8'h00,8'h28          // UDP length = 40
+            , 8'h63,8'hDD          // dst port = 0x63DD
+            , 8'h00,8'h00          // src port
+            // IPv4 header bytes 14–33
+            , 8'h0A,8'h00,8'h01,8'h01 // dst IP = 10.0.1.1
+            , 8'hC0,8'hA8,8'h00,8'h01 // src IP = 192.168.0.1
+            , 8'h00,8'h00          // header checksum
+            , 8'h11                // protocol = UDP
+            , 8'h40                // TTL = 64
+            , 8'h00,8'h00          // flags/fragment
+            , 8'h00,8'h00          // identification
+            , 8'h00,8'h3C          // total length = 60
+            , 8'h00                // TOS
+            , 8'h54                // version=4, IHL=5
+            // Ethernet header bytes 0–13 (lowest‐order bytes in this concat)
+            , 8'h08,8'h00                        // EtherType = 0x0800
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
+            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF  // dest MAC
+        };
+        test_packets[0].byte_len = 74;
+        // Wrong MAC
+        test_packets[1] = '{
+            data: 2048'h0011223344556677_112233445566_0800_4500_003C_0000_0000_4011_0000_C0A80001_0A000101_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
+            byte_len: 74
+        };
+
+        // Wrong Ethertype
+        test_packets[2] = '{
+            data: 2048'hCAFEDEADBEEF_112233445566_86DD_4500_003C_0000_0000_4011_0000_C0A80001_0A000101_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
+            byte_len: 74
+        };
+
+        // Wrong Protocol
+        test_packets[3] = '{
+            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4006_0000_C0A80001_0A000101_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
+            byte_len: 74
+        };
+
+        // Wrong IP Range
+        test_packets[4] = '{
+            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4011_0000_C0A80001_0A000104_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
+            byte_len: 74
+        };
+
+        // Wrong UDP Port
+        test_packets[5] = '{
+            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4011_0000_C0A80001_0A000101_3039_1234_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
+            byte_len: 74
+        };
+
+        // Truncated Packet
+        test_packets[6] = '{
+            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4011,
+            byte_len: 18
+        };
+    end
+
     task reset();
         rst_n = 0;
         in_valid = 0;
         out_ready = 1;
         clk = 0;
-        #20;
+        @(posedge clk);
         rst_n = 1;
-        #10;
+        @(posedge clk);
     endtask
 
-    task send_packet(input [WIDTH-1:0] d0, input [31:0] k0,
-                     input [WIDTH-1:0] d1, input [31:0] k1,
-                     input bit last_on_second);
-        @(posedge clk);
-        in_valid = 1;
-        in_data  = d0;
-        in_keep  = k0;
-        in_last  = 0;
-        @(posedge clk);
-        in_data  = d1;
-        in_keep  = k1;
-        in_last  = last_on_second;
-        @(posedge clk);
-        in_valid = 0;
-        in_last  = 0;
+    task automatic send_packet(input test_packet_struct pkt);
+        int i;
+        logic [255:0] data_word;
+        logic [31:0] keep;
+        int byte_index;
+        int chunk_size;
+
+        if (pkt.byte_len == 0) begin
+            $display("Warning: Attempted to send zero-length packet.");
+            return;
+        end
+
+        byte_index = 0;
+
+        while (byte_index < pkt.byte_len) begin
+            data_word = '0;
+            keep = '0;
+
+            chunk_size = (pkt.byte_len - byte_index >= 32) ? 32 : (pkt.byte_len - byte_index);
+
+            for (i = 0; i < chunk_size; i++) begin
+                data_word[i*8 +: 8] = pkt.data[(byte_index + i)*8 +: 8];
+                keep[i] = 1'b1;
+            end
+
+            in_data  = data_word;
+            in_keep  = keep;
+            in_valid = 1;
+            in_last  = ((byte_index + chunk_size) >= pkt.byte_len);
+
+            @(posedge clk);
+            in_valid = 0;
+            in_last  = 0;
+
+            byte_index += chunk_size;
+        end
     endtask
 
     initial begin
         reset();
 
-        // Test 1: send a 2-cycle packet with a valid, matching header.
-        send_packet(256'hDEADBEEF_CAFEFEED_01234567_89ABCDEF_00000000_00000000_00000000_00000000,
-                    32'hFFFF_FFFF,
-                    256'h11223344_55667788_99AABBCC_DDEEFF00_00000000_00000000_00000000_00000000,
-                    32'h0000_FFFF,
-                    1'b1);
-        // Test 2: send a packet with a nonmatching UDP port.
-        send_packet(
-            {
-                16'hCAFE, 32'hDEADBEEF,
-                48'h010203040506,
-                16'h0800,
-                8'h45, 8'h00,
-                16'h0020, 16'h0000,
-                16'h0000,
-                8'h40, 8'h11,
-                16'h0000,
-                32'h0A000101,
-                32'h0A000102
-            }, 32'hFFFF_FFFF,
-        
-            {
-                16'd12345,            // Source port
-                16'd12346,            // Non-matching dest port
-                16'h000C, 16'h0000,
-                192'h0
-            }, 32'h0000_FFFF,
-        
-            128'hDEAD_CAFE_BEEF_CAFE_DEAD_CAFE_BEEF_CAFE; //Payload
-        );
-        // Test 3: Invalid Ethertype. 
-        //With current logic, this behaves the same as the previous test, but I plan to 
-        //
-            send_packet(
-                {
-                    16'hCAFE, 32'hDEADBEEF,
-                    48'h010203040506,
-                    16'h86DD,             // Ethertype: IPv6 (should fail)
-                    8'h45, 8'h00,
-                    16'h0020, 16'h0000,
-                    16'h0000,
-                    8'h40, 8'h11,
-                    16'h0000,
-                    32'h0A000101,
-                    32'h0A000102
-                }, 32'hFFFF_FFFF,
-            
-                {
-                    16'd12345, 16'd25565,
-                    16'h000C, 16'h0000,
-                    192'h0
-                }, 32'h0000_FFFF,
-            
-                128'hDEAD_CAFE_BEEF_CAFE_DEAD_CAFE_BEEF_CAFE;  //Payload
-            );     
-        //Test 4: Garbage packet
-        send_packet(
-            256'hFFFF_DEAD_BEEF_CAFE_00000000_00000000_00000000_00000000,  // Random garbage
-            32'h0000_0FFF,  // Only 12 bytes valid
-            256'h0,         // Second beat is missing
-            32'h0000_0000,
-            1'b1
-        );   
+        foreach(test_packets[i]) begin
+            send_packet(test_packets[i]);
+        end
 
         repeat (10) @(posedge clk);  // Wait for output to flush
 

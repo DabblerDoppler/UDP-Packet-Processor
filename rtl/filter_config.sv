@@ -4,9 +4,7 @@ module filter_config (
     input  logic        clk,
     input  logic        rst_n,
 
-    // Simplified AXI sytle configuration interface
-    // This simplified version is mostly for testing, 
-    // I might update it later to be configurable for use with a CPU.
+    // Simplified AXI style configuration interface
     input  logic        cfg_we,
     input  logic [3:0]  cfg_waddr,
     input  logic [31:0] cfg_wdata,
@@ -22,7 +20,8 @@ module filter_config (
     output logic [15:0] udp_dst_port
 );
     // MAC address is split across two registers
-    logic [31:0] mac_lo, mac_hi;
+    logic [31:0] mac_lo;
+    logic [15:0] mac_hi;
 
     // Write logic
     always_ff @(posedge clk or negedge rst_n) begin
