@@ -7,6 +7,8 @@
 *.img7
 *.img
 
+*.wlf
+
 # Pharo Smalltalk Debug log file
 PharoDebug.log
 
@@ -29,3 +31,7 @@ SqueakDebug.log
 # Metacello-github cache
 /github-cache
 github-*.zip
+
+#modelsim working junk
+/modesim/work
+/modelsim/transcript
