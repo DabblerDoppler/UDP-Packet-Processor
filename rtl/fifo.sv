@@ -17,8 +17,8 @@ module fifo #(
     // Read interface
     input  logic              rd_en,
     output logic [WIDTH-1:0]  rd_data,
-    input  logic [31:0]       rd_keep,
-    input  logic              rd_last,
+    output  logic [31:0]      rd_keep,
+    output  logic             rd_last,
     output logic              empty
 );
     // 1 LSL (x) = 2^x 
@@ -57,8 +57,10 @@ module fifo #(
         end
     end
 
-    assign rd_data = data_mem[rd_ptr];
-    assign rd_keep = keep_mem[rd_ptr];
-    assign rd_last = last_mem[rd_ptr];
+    assign rd_valid = !empty;
+
+    assign rd_data = rd_valid ? data_mem[rd_ptr] : '0;
+    assign rd_keep = rd_valid ? keep_mem[rd_ptr] : '0;
+    assign rd_last = rd_valid ? last_mem[rd_ptr] : '0;
 
 endmodule

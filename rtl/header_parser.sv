@@ -110,7 +110,8 @@ module header_parser (
             case (state)
                 IDLE: begin
                     timestamp_valid <= 1'b0;
-                    if(in_valid && in_ready) begin
+                    //if our packets truncated then we need to drop it early.
+                    if(in_valid && in_ready && popcount32(in_keep) == 32) begin
                         last_data_in           <= in_data;
                         packet_start_timestamp <= cycle_count;
                         valid_bytes            <= popcount32(in_keep);
@@ -140,7 +141,7 @@ module header_parser (
                     if(in_last) begin
                         state           <= IDLE;
                         timestamp_valid <= 1'b1;
-                        timestamp       <= cycle_count - packet_start_timestamp;
+                        timestamp       <= (cycle_count + 1) - packet_start_timestamp;
                     end
                 end
             endcase
@@ -298,135 +299,160 @@ module header_parser_testbench;
             , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
             , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF  // dest MAC
         };
-        test_packets[0].byte_len = 74;
+        test_packets[0].byte_len = 68;
 
         // Wrong MAC
         test_packets[1].data = {
-            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
-            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
-            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
-            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
-            , 8'h00,8'h00 // checksum
-            , 8'h00,8'h28 // UDP length = 40
-            , 8'h63,8'hDD // dst port
-            , 8'h30,8'h39 // src port
-            , 8'h0A,8'h00,8'h01,8'h01 // dst IP
-            , 8'hC0,8'hA8,8'h00,8'h01 // src IP
-            , 8'h00,8'h00 // header checksum
-            , 8'h11 // protocol = UDP
-            , 8'h40 // TTL
-            , 8'h00,8'h00 // flags/fragment
-            , 8'h00,8'h00 // identification
-            , 8'h00,8'h3C // total length = 60
-            , 8'h00 // TOS
-            , 8'h54 // version=4, IHL=5
-            , 8'h08,8'h00 // EtherType
-            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66 // src MAC
-            , 8'h00,8'h11,8'h22,8'h33,8'h44,8'h55 // dest MAC (wrong)
+            // payload (32 B of random data) – highest‐order bytes in this concat
+        8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+        , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+        , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+        , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+        // UDP header bytes 34–41
+        , 8'h00                // checksum LSB
+        , 8'h00                // checksum MSB
+        , 8'h00,8'h28          // UDP length = 40
+        , 8'h63,8'hDD          // dst port = 0x63DD
+        , 8'h00,8'h00          // src port
+        // IPv4 header bytes 14–33
+        , 8'h0A,8'h00,8'h01,8'h01 // dst IP = 10.0.1.1
+        , 8'hC0,8'hA8,8'h00,8'h01 // src IP = 192.168.0.1
+        , 8'h00,8'h00          // header checksum
+        , 8'h11                // protocol = UDP
+        , 8'h40                // TTL = 64
+        , 8'h00,8'h00          // flags/fragment
+        , 8'h00,8'h00          // identification
+        , 8'h00,8'h3C          // total length = 60
+        , 8'h00                // TOS
+        , 8'h54                // version=4, IHL=5
+        // Ethernet header bytes 0–13 (lowest‐order bytes in this concat)
+        , 8'h08,8'h00                        // EtherType = 0x0800
+        , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
+        , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hE5  // dest MAC (Wrong)
         };
-        test_packets[1].byte_len = 74;
+        test_packets[1].byte_len = 68;
         
         // Wrong Ethertype
         test_packets[2].data = {
-            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
-            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
-            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
-            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
-            , 8'h00,8'h00
-            , 8'h00,8'h28
-            , 8'h63,8'hDD
-            , 8'h30,8'h39
-            , 8'h0A,8'h00,8'h01,8'h01
-            , 8'hC0,8'hA8,8'h00,8'h01
-            , 8'h00,8'h00
-            , 8'h11
-            , 8'h40
-            , 8'h00,8'h00
-            , 8'h00,8'h00
-            , 8'h00,8'h3C
-            , 8'h00
-            , 8'h54
-            , 8'h86,8'hDD // Wrong EtherType
-            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
-            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            // payload (32 B of random data) – highest‐order bytes in this concat
+        8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+        , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+        , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+        , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+        // UDP header bytes 34–41
+        , 8'h00                // checksum LSB
+        , 8'h00                // checksum MSB
+        , 8'h00,8'h28          // UDP length = 40
+        , 8'h63,8'hDD          // dst port = 0x63DD
+        , 8'h00,8'h00          // src port
+        // IPv4 header bytes 14–33
+        , 8'h0A,8'h00,8'h01,8'h01 // dst IP = 10.0.1.1
+        , 8'hC0,8'hA8,8'h00,8'h01 // src IP = 192.168.0.1
+        , 8'h00,8'h00          // header checksum
+        , 8'h11                // protocol = UDP
+        , 8'h40                // TTL = 64
+        , 8'h00,8'h00          // flags/fragment
+        , 8'h00,8'h00          // identification
+        , 8'h00,8'h3C          // total length = 60
+        , 8'h00                // TOS
+        , 8'h54                // version=4, IHL=5
+        // Ethernet header bytes 0–13 (lowest‐order bytes in this concat)
+        , 8'h08,8'h01                        // Wrong Ethertype
+        , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
+        , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF  // dest MAC
         };
-        test_packets[2].byte_len = 74;
+        test_packets[2].byte_len = 68;
         
         // Wrong Protocol
         test_packets[3].data = {
-            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
-            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
-            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
-            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
-            , 8'h00,8'h00
-            , 8'h00,8'h28
-            , 8'h63,8'hDD
-            , 8'h30,8'h39
-            , 8'h0A,8'h00,8'h01,8'h01
-            , 8'hC0,8'hA8,8'h00,8'h01
-            , 8'h00,8'h00
-            , 8'h06 // Wrong protocol = TCP
-            , 8'h40
-            , 8'h00,8'h00
-            , 8'h00,8'h00
-            , 8'h00,8'h3C
-            , 8'h00
-            , 8'h54
-            , 8'h08,8'h00
-            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
-            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            // payload (32 B of random data) – highest‐order bytes in this concat
+        8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+        , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+        , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+        , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+        // UDP header bytes 34–41
+        , 8'h00                // checksum LSB
+        , 8'h00                // checksum MSB
+        , 8'h00,8'h28          // UDP length = 40
+        , 8'h63,8'hDD          // dst port = 0x63DD
+        , 8'h00,8'h00          // src port
+        // IPv4 header bytes 14–33
+        , 8'h0A,8'h00,8'h01,8'h01 // dst IP = 10.0.1.1
+        , 8'hC0,8'hA8,8'h00,8'h01 // src IP = 192.168.0.1
+        , 8'h00,8'h00          // header checksum
+        , 8'h10                // wrong protocol
+        , 8'h40                // TTL = 64
+        , 8'h00,8'h00          // flags/fragment
+        , 8'h00,8'h00          // identification
+        , 8'h00,8'h3C          // total length = 60
+        , 8'h00                // TOS
+        , 8'h54                // version=4, IHL=5
+        // Ethernet header bytes 0–13 (lowest‐order bytes in this concat)
+        , 8'h08,8'h00                        // EtherType = 0x0800
+        , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
+        , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF  // dest MAC
         };
-        test_packets[3].byte_len = 74;
+        test_packets[3].byte_len = 68;
         
         // Wrong IP Range
         test_packets[4].data = {
-            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
-            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
-            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
-            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
-            , 8'h00,8'h00
-            , 8'h00,8'h28
-            , 8'h63,8'hDD
-            , 8'h30,8'h39
-            , 8'h0A,8'h00,8'h01,8'h04 // Wrong dst IP
-            , 8'hC0,8'hA8,8'h00,8'h01
-            , 8'h00,8'h00
-            , 8'h11
-            , 8'h40
-            , 8'h00,8'h00
-            , 8'h00,8'h00
-            , 8'h00,8'h3C
-            , 8'h00
-            , 8'h54
-            , 8'h08,8'h00
-            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
-            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            // payload (32 B of random data) – highest‐order bytes in this concat
+        8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+        , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+        , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+        , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+        // UDP header bytes 34–41
+        , 8'h00                // checksum LSB
+        , 8'h00                // checksum MSB
+        , 8'h00,8'h28          // UDP length = 40
+        , 8'h63,8'hDD          // dst port = 0x63DD
+        , 8'h00,8'h00          // src port
+        // IPv4 header bytes 14–33
+        , 8'h0F,8'hA8,8'h01,8'h01 // dst IP = 16.168.1.1 (wrong)
+        , 8'hC0,8'hA8,8'h00,8'h01 // src IP = 192.168.0.1
+        , 8'h00,8'h00          // header checksum
+        , 8'h11                // protocol = UDP
+        , 8'h40                // TTL = 64
+        , 8'h00,8'h00          // flags/fragment
+        , 8'h00,8'h00          // identification
+        , 8'h00,8'h3C          // total length = 60
+        , 8'h00                // TOS
+        , 8'h54                // version=4, IHL=5
+        // Ethernet header bytes 0–13 (lowest‐order bytes in this concat)
+        , 8'h08,8'h00                        // EtherType = 0x0800
+        , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
+        , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF  // dest MAC
         };
-        test_packets[4].byte_len = 74;
+        test_packets[4].byte_len = 68;
         
         // Wrong UDP Port
         test_packets[5].data = {
-            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
-            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
-            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
-            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
-            , 8'h00,8'h00
-            , 8'h00,8'h28
-            , 8'h12,8'h34 // Wrong dst port
-            , 8'h30,8'h39
-            , 8'h0A,8'h00,8'h01,8'h01
-            , 8'hC0,8'hA8,8'h00,8'h01
-            , 8'h00,8'h00
-            , 8'h11
-            , 8'h40
-            , 8'h00,8'h00
-            , 8'h00,8'h00
-            , 8'h00,8'h3C
-            , 8'h00
-            , 8'h54
-            , 8'h08,8'h00
-            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
-            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            // payload (32 B of random data) – highest‐order bytes in this concat
+        8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+        , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+        , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+        , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+        // UDP header bytes 34–41
+        , 8'h00                // checksum LSB
+        , 8'h00                // checksum MSB
+        , 8'h00,8'h28          // UDP length = 40
+        , 8'h63,8'hAD          // Wrong Destination port
+        , 8'h00,8'h00          // src port
+        // IPv4 header bytes 14–33
+        , 8'h0A,8'h00,8'h01,8'h01 // dst IP = 10.0.1.1
+        , 8'hC0,8'hA8,8'h00,8'h01 // src IP = 192.168.0.1
+        , 8'h00,8'h00          // header checksum
+        , 8'h11                // protocol = UDP
+        , 8'h40                // TTL = 64
+        , 8'h00,8'h00          // flags/fragment
+        , 8'h00,8'h00          // identification
+        , 8'h00,8'h3C          // total length = 60
+        , 8'h00                // TOS
+        , 8'h54                // version=4, IHL=5
+        // Ethernet header bytes 0–13 (lowest‐order bytes in this concat)
+        , 8'h08,8'h00                        // EtherType = 0x0800
+        , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
+        , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF  // dest MAC
         };
         test_packets[5].byte_len = 74;
         
@@ -443,29 +469,6 @@ module header_parser_testbench;
             , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
         };
         test_packets[6].byte_len = 18;
-        // Backpressure case
-        test_packets[7].data = {
-            8'hDE,8'hAD,8'hBE,8'hEF,8'hDE,8'hAD,8'hBE,8'hEF
-            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hDE,8'hAD,8'hBE,8'hEF
-            , 8'h00,8'h00
-            , 8'h00,8'h28
-            , 8'h63,8'hDD
-            , 8'h30,8'h39
-            , 8'h0A,8'h00,8'h01,8'h01
-            , 8'hC0,8'hA8,8'h00,8'h01
-            , 8'h00,8'h00
-            , 8'h11
-            , 8'h40
-            , 8'h00,8'h00
-            , 8'h00,8'h00
-            , 8'h00,8'h3C
-            , 8'h00
-            , 8'h54
-            , 8'h08,8'h00
-            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
-            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
-        };
-        test_packets[7].byte_len = 74;
     end
 
 
@@ -517,26 +520,42 @@ module header_parser_testbench;
             
             in_valid = 0;
             in_last  = 0;
+            in_data  = 0;
 
             byte_index += chunk_size;
         end
     endtask
 
+    //filter testing
+    initial begin
+        reset();
+        //send each packet sequentially
+        foreach(test_packets[i]) begin  
+            send_packet(test_packets[i], 1'b0);
+        end
+        repeat(5) @(posedge clk);
+        $display("Simulation finished.");
+        $finish;
+    end
+
+    /*
+    //backpressure testing
     initial begin
         reset();
 
-        foreach(test_packets[i]) begin
-            
-            send_packet(test_packets[i], i == 7);
-        end
 
+	send_packet(test_packets[0], 1'b1);
         // Monitor for correct stall/resume behavior
-
+        repeat (3) @(posedge clk);
+            out_ready = 1'b1;
+        send_packet(test_packets[0], 1'b0);
         repeat (10) @(posedge clk);  // Wait for output to flush
 
         $display("Simulation finished.");
         $finish;
     end
+    */
+
 
 endmodule
 
