@@ -266,7 +266,7 @@ module header_parser_testbench;
         logic [7:0]    byte_len;
     } test_packet_struct;
 
-    test_packet_struct test_packets [0:6];
+    test_packet_struct test_packets [0:7];
 
     initial begin
         // Matching packet
@@ -299,42 +299,175 @@ module header_parser_testbench;
             , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF  // dest MAC
         };
         test_packets[0].byte_len = 74;
+
         // Wrong MAC
-        test_packets[1] = '{
-            data: 2048'h0011223344556677_112233445566_0800_4500_003C_0000_0000_4011_0000_C0A80001_0A000101_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
-            byte_len: 74
+        test_packets[1].data = {
+            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            , 8'h00,8'h00 // checksum
+            , 8'h00,8'h28 // UDP length = 40
+            , 8'h63,8'hDD // dst port
+            , 8'h30,8'h39 // src port
+            , 8'h0A,8'h00,8'h01,8'h01 // dst IP
+            , 8'hC0,8'hA8,8'h00,8'h01 // src IP
+            , 8'h00,8'h00 // header checksum
+            , 8'h11 // protocol = UDP
+            , 8'h40 // TTL
+            , 8'h00,8'h00 // flags/fragment
+            , 8'h00,8'h00 // identification
+            , 8'h00,8'h3C // total length = 60
+            , 8'h00 // TOS
+            , 8'h54 // version=4, IHL=5
+            , 8'h08,8'h00 // EtherType
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66 // src MAC
+            , 8'h00,8'h11,8'h22,8'h33,8'h44,8'h55 // dest MAC (wrong)
         };
-
+        test_packets[1].byte_len = 74;
+        
         // Wrong Ethertype
-        test_packets[2] = '{
-            data: 2048'hCAFEDEADBEEF_112233445566_86DD_4500_003C_0000_0000_4011_0000_C0A80001_0A000101_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
-            byte_len: 74
+        test_packets[2].data = {
+            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            , 8'h00,8'h00
+            , 8'h00,8'h28
+            , 8'h63,8'hDD
+            , 8'h30,8'h39
+            , 8'h0A,8'h00,8'h01,8'h01
+            , 8'hC0,8'hA8,8'h00,8'h01
+            , 8'h00,8'h00
+            , 8'h11
+            , 8'h40
+            , 8'h00,8'h00
+            , 8'h00,8'h00
+            , 8'h00,8'h3C
+            , 8'h00
+            , 8'h54
+            , 8'h86,8'hDD // Wrong EtherType
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
+            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
         };
-
+        test_packets[2].byte_len = 74;
+        
         // Wrong Protocol
-        test_packets[3] = '{
-            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4006_0000_C0A80001_0A000101_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
-            byte_len: 74
+        test_packets[3].data = {
+            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            , 8'h00,8'h00
+            , 8'h00,8'h28
+            , 8'h63,8'hDD
+            , 8'h30,8'h39
+            , 8'h0A,8'h00,8'h01,8'h01
+            , 8'hC0,8'hA8,8'h00,8'h01
+            , 8'h00,8'h00
+            , 8'h06 // Wrong protocol = TCP
+            , 8'h40
+            , 8'h00,8'h00
+            , 8'h00,8'h00
+            , 8'h00,8'h3C
+            , 8'h00
+            , 8'h54
+            , 8'h08,8'h00
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
+            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
         };
-
+        test_packets[3].byte_len = 74;
+        
         // Wrong IP Range
-        test_packets[4] = '{
-            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4011_0000_C0A80001_0A000104_3039_63DD_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
-            byte_len: 74
+        test_packets[4].data = {
+            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            , 8'h00,8'h00
+            , 8'h00,8'h28
+            , 8'h63,8'hDD
+            , 8'h30,8'h39
+            , 8'h0A,8'h00,8'h01,8'h04 // Wrong dst IP
+            , 8'hC0,8'hA8,8'h00,8'h01
+            , 8'h00,8'h00
+            , 8'h11
+            , 8'h40
+            , 8'h00,8'h00
+            , 8'h00,8'h00
+            , 8'h00,8'h3C
+            , 8'h00
+            , 8'h54
+            , 8'h08,8'h00
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
+            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
         };
-
+        test_packets[4].byte_len = 74;
+        
         // Wrong UDP Port
-        test_packets[5] = '{
-            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4011_0000_C0A80001_0A000101_3039_1234_0028_0000_DEADBEEFDEADBEEFDEADBEEFDEADBEEF,
-            byte_len: 74
+        test_packets[5].data = {
+            8'hAA,8'hBB,8'hCC,8'hDD,8'hEE,8'hFF,8'h11,8'h22
+            , 8'h33,8'h44,8'h55,8'h66,8'h77,8'h88,8'h99,8'h00
+            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD
+            , 8'hBE,8'hEF,8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+            , 8'h00,8'h00
+            , 8'h00,8'h28
+            , 8'h12,8'h34 // Wrong dst port
+            , 8'h30,8'h39
+            , 8'h0A,8'h00,8'h01,8'h01
+            , 8'hC0,8'hA8,8'h00,8'h01
+            , 8'h00,8'h00
+            , 8'h11
+            , 8'h40
+            , 8'h00,8'h00
+            , 8'h00,8'h00
+            , 8'h00,8'h3C
+            , 8'h00
+            , 8'h54
+            , 8'h08,8'h00
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
+            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
         };
-
+        test_packets[5].byte_len = 74;
+        
         // Truncated Packet
-        test_packets[6] = '{
-            data: 2048'hCAFEDEADBEEF_112233445566_0800_4500_003C_0000_0000_4011,
-            byte_len: 18
+        test_packets[6].data = {
+            8'h40,8'h11
+            , 8'h00,8'h00
+            , 8'h00,8'h00
+            , 8'h00,8'h3C
+            , 8'h00
+            , 8'h54
+            , 8'h08,8'h00
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
+            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
         };
+        test_packets[6].byte_len = 18;
+        // Backpressure case
+        test_packets[7].data = {
+            8'hDE,8'hAD,8'hBE,8'hEF,8'hDE,8'hAD,8'hBE,8'hEF
+            , 8'hDE,8'hAD,8'hBE,8'hEF,8'hDE,8'hAD,8'hBE,8'hEF
+            , 8'h00,8'h00
+            , 8'h00,8'h28
+            , 8'h63,8'hDD
+            , 8'h30,8'h39
+            , 8'h0A,8'h00,8'h01,8'h01
+            , 8'hC0,8'hA8,8'h00,8'h01
+            , 8'h00,8'h00
+            , 8'h11
+            , 8'h40
+            , 8'h00,8'h00
+            , 8'h00,8'h00
+            , 8'h00,8'h3C
+            , 8'h00
+            , 8'h54
+            , 8'h08,8'h00
+            , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66
+            , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hEF
+        };
+        test_packets[7].byte_len = 74;
     end
+
 
     task reset();
         rst_n = 0;
@@ -346,7 +479,7 @@ module header_parser_testbench;
         @(posedge clk);
     endtask
 
-    task automatic send_packet(input test_packet_struct pkt);
+    task automatic send_packet(input test_packet_struct pkt, input logic backpressure);
         int i;
         logic [255:0] data_word;
         logic [31:0] keep;
@@ -370,13 +503,18 @@ module header_parser_testbench;
                 data_word[i*8 +: 8] = pkt.data[(byte_index + i)*8 +: 8];
                 keep[i] = 1'b1;
             end
+            
 
             in_data  = data_word;
             in_keep  = keep;
             in_valid = 1;
             in_last  = ((byte_index + chunk_size) >= pkt.byte_len);
 
+            if(backpressure) begin
+                out_ready = !out_ready; 
+            end
             @(posedge clk);
+            
             in_valid = 0;
             in_last  = 0;
 
@@ -388,8 +526,11 @@ module header_parser_testbench;
         reset();
 
         foreach(test_packets[i]) begin
-            send_packet(test_packets[i]);
+            
+            send_packet(test_packets[i], i == 7);
         end
+
+        // Monitor for correct stall/resume behavior
 
         repeat (10) @(posedge clk);  // Wait for output to flush
 
