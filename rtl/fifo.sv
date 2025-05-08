@@ -49,11 +49,8 @@ module fifo #(
             if (rd_en && !empty) begin
                 rd_ptr <= rd_ptr + 1;
             end
-            case ({wr_en && !full, rd_en && !empty})
-                2'b10: count <= count + 1;
-                2'b01: count <= count - 1;
-                default: ;
-            endcase
+				if (wr_en && !full) count <= count + 1;
+				if (rd_en && !empty) count <= count - 1;
         end
     end
 

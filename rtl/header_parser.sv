@@ -21,7 +21,7 @@ module header_parser (
     input  logic           out_ready,
     output logic           in_ready
 );
-    localparam [5:0] HEADER_SIZE = 42;
+    localparam [5:0] HEADER_SIZE = 42-32;
 
     typedef enum logic[1:0] {
         IDLE, 
@@ -111,18 +111,17 @@ module header_parser (
                 IDLE: begin
                     timestamp_valid <= 1'b0;
                     //if our packets truncated then we need to drop it early.
-                    if(in_valid && in_ready && popcount32(in_keep) == 32) begin
+						  //we're making the assumption in this design that we won't support packets
+						  //where the first beat is lower than 32 bytes.
+                    if(in_valid && in_ready && (&in_keep) && ~in_last) begin
                         last_data_in           <= in_data;
                         packet_start_timestamp <= cycle_count;
-                        valid_bytes            <= popcount32(in_keep);
+                        valid_bytes            <= 32;
                         prev_buffer_valid      <= in_valid;
                         state                  <= PARSE_HEADER;
                     end 
                 end
                 PARSE_HEADER: begin
-                    // These are blocking statements intentionally - it allows us to skip a 
-                    // clock cycle of latency and start parsing immediately.
-                    valid_bytes <= valid_bytes + popcount32(in_keep);
                     // If we have a full valid header, start parsing the payload. 
                     if(header_valid) begin
                         valid_bytes       <= 6'b0;
@@ -148,26 +147,18 @@ module header_parser (
         end
     end
 
-    assign packet_buffer[256:511] = last_data_in;
 
-    assign final_valid_bytes = valid_bytes + popcount32(in_keep);
 
     always_comb begin
         case (state) 
-            IDLE: begin
-                // First 256 bits contain Ethernet header + start of IP header
-                packet_buffer[0:255] = 256'b0;
-                buffer_valid           = 1'b0;
-                stream_data            = 256'b0;
-                stream_keep            = 32'b0;
-                stream_valid           = 1'b0;
-                stream_last            = 1'b0;
-            end
+				//Idle has the same requirements as our default case, so I don't write it here for 
+				//optimization.
             PARSE_HEADER: begin
                 // Second 256 bits contain rest of IP header + UDP header + start of payload
                 packet_buffer[0:255] = in_data;
+					 packet_buffer[256:511] = last_data_in;
                 buffer_valid = prev_buffer_valid && in_valid && 
-                              (final_valid_bytes >= HEADER_SIZE);
+                              (trailing_ones(in_keep) > HEADER_SIZE) && is_lsb_contiguous(in_keep);
                 if(header_valid) begin
                     // Pass the complete packet
                     stream_data  = in_data;
@@ -184,7 +175,7 @@ module header_parser (
                 end
             end
             STREAM_PAYLOAD: begin
-                packet_buffer[0:255] = 256'b0;
+                packet_buffer[0:511]   = 512'b0;
                 buffer_valid           = 1'b0;
                 stream_data            = in_data;
                 stream_keep            = in_keep;
@@ -192,7 +183,8 @@ module header_parser (
                 stream_last            = in_last;
             end
             default: begin
-                packet_buffer[0:255] = 256'b0;
+                packet_buffer[0:255]   = 256'b0;
+					 packet_buffer[256:511] = in_data;
                 buffer_valid           = 1'b0;
                 stream_data            = 256'b0;
                 stream_keep            = 32'b0;
@@ -202,18 +194,68 @@ module header_parser (
         endcase
     end
 
-    function automatic [5:0] popcount32(input logic [31:0] x);
-        popcount32 = 
-            x[0]  + x[1]  + x[2]  + x[3]  +
-            x[4]  + x[5]  + x[6]  + x[7]  +
-            x[8]  + x[9]  + x[10] + x[11] +
-            x[12] + x[13] + x[14] + x[15] +
-            x[16] + x[17] + x[18] + x[19] +
-            x[20] + x[21] + x[22] + x[23] +
-            x[24] + x[25] + x[26] + x[27] +
-            x[28] + x[29] + x[30] + x[31];
-    endfunction
 
+	 
+	 
+	function automatic logic is_lsb_contiguous(input logic [31:0] keep);
+		 logic [31:0] mask;
+		 begin
+			  mask = (32'hFFFF_FFFF >> (32 - countones32(keep)));
+			  is_lsb_contiguous = (keep == mask);
+		 end
+	endfunction
+	
+	function automatic [5:0] countones32(input logic [31:0] x);
+		 logic [15:0] s1;
+		 logic [7:0]  s2;
+		 logic [3:0]  s3;
+		 logic [1:0]  s4;
+		 logic [5:0]  total;
+
+		 integer i;
+
+		 // Stage 1: Pairwise add (1-bit + 1-bit)
+		 for (i = 0; i < 16; i++) begin
+			  s1[i] = x[2*i] + x[2*i+1];
+		 end
+
+		 // Stage 2: Add pairs of 2-bit results
+		 for (i = 0; i < 8; i++) begin
+			  s2[i] = s1[2*i] + s1[2*i+1];
+		 end
+
+		 // Stage 3: Add pairs of 3-bit results
+		 for (i = 0; i < 4; i++) begin
+			  s3[i] = s2[2*i] + s2[2*i+1];
+		 end
+
+		 // Stage 4: Add pairs of 4-bit results
+		 for (i = 0; i < 2; i++) begin
+			  s4[i] = s3[2*i] + s3[2*i+1];
+		 end
+
+		 // Final sum
+		 total = s4[0] + s4[1];
+
+		 return total;
+	endfunction
+	
+	function automatic [5:0] trailing_ones(input logic [31:0] keep);
+    integer i;
+    begin
+        trailing_ones = 0;
+        for (i = 0; i < 32; i++) begin
+            if (keep[i])
+                trailing_ones += 1;
+            else
+                break;
+        end
+    end
+	 
+	 
+endfunction
+	
+	
 endmodule
 
 module header_parser_testbench;
@@ -525,7 +567,9 @@ module header_parser_testbench;
             byte_index += chunk_size;
         end
     endtask
-
+	 
+	 
+		/*
     //filter testing
     initial begin
         reset();
@@ -538,13 +582,13 @@ module header_parser_testbench;
         $finish;
     end
 
-    /*
+	 */
     //backpressure testing
     initial begin
-        reset();
+         reset();
 
 
-	send_packet(test_packets[0], 1'b1);
+			send_packet(test_packets[0], 1'b1);
         // Monitor for correct stall/resume behavior
         repeat (3) @(posedge clk);
             out_ready = 1'b1;
@@ -554,7 +598,6 @@ module header_parser_testbench;
         $display("Simulation finished.");
         $finish;
     end
-    */
 
 
 endmodule
