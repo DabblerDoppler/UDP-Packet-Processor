@@ -16,8 +16,6 @@ A high-performance UDP header parser using a 256-bit AXI input stream. Designed 
 
 The UDP Packet Processor consists of the following key components:
 - Header Parser
-- Payload Extractor
-- Checksum Verification
 - Packet Filter
 - Output Buffer
 
@@ -25,23 +23,21 @@ The UDP Packet Processor consists of the following key components:
 
 | Metric | Value |
 |--------|-------|
-| Maximum Clock Frequency | X MHz |
+| Maximum Clock Frequency (Slow 900mV 100C Model) | X MHz |
 | Latency (min) | X clock cycles |
 | Latency (max) | X clock cycles |
 | Resource Utilization | X LUTs, X FFs, X BRAMs |
-| Throughput | X Gbps |
+| Throughput | 94.4 Gbps |
 
 ## Simulation and Verification
 
 The design has been verified using:
-- Unit tests for individual modules
 - Integration tests for the complete system
-- Randomized test vectors
 - Directed test cases for edge conditions
 
 ## Implementation Results
 
-The design has been synthesized for Arria 10 with the following results:
+The design has been synthesized for Arria 10 10AX115S2F45I2SG with the following results:
 - [Include timing, area, and power results]
 
 
