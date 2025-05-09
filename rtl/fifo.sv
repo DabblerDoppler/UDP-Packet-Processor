@@ -1,8 +1,9 @@
 //This is a single clocked configurable width/depth FIFO
 //I've extended it to carry other stream data (keep, last, etc)
+
 module fifo #(
     parameter WIDTH = 256,
-    parameter DEPTH_LOG2 = 3  // 2^3 = 8 entries
+    parameter DEPTH_LOG2 = 2  // 2^2 = 4 entries - small so we don't have to use LUTRAM
 )(
     input  logic              clk,
     input  logic              rst_n,
@@ -24,12 +25,14 @@ module fifo #(
     // 1 LSL (x) = 2^x 
     localparam DEPTH = 1 << DEPTH_LOG2;
 
-    //2d memory array
-    logic [WIDTH-1:0] data_mem [0:DEPTH-1];
-    logic [31:0] keep_mem [0:DEPTH-1];
-    logic last_mem [0:DEPTH-1];
+	 //unrolled memory to prevent quartus from 
+    logic [WIDTH-1:0] data0, data1, data2, data3;
+    logic [(WIDTH/8)-1:0]      keep0, keep1, keep2, keep3;
+    logic             last0, last1, last2, last3;
+	
     logic [DEPTH_LOG2-1:0] rd_ptr, wr_ptr;
     logic [DEPTH_LOG2:0] count;
+	 
 
     assign empty = (count == 0);
     assign full  = (count == DEPTH);
@@ -41,23 +44,26 @@ module fifo #(
             count  <= 0;
         end else begin
             if (wr_en && !full) begin
-                data_mem[wr_ptr] <= wr_data;
-                keep_mem[wr_ptr] <= wr_keep;
-                last_mem[wr_ptr] <= wr_last;
+					case (wr_ptr)
+						 2'd0: begin data0 <= wr_data; keep0 <= wr_keep; last0 <= wr_last; end
+						 2'd1: begin data1 <= wr_data; keep1 <= wr_keep; last1 <= wr_last; end
+						 2'd2: begin data2 <= wr_data; keep2 <= wr_keep; last2 <= wr_last; end
+						 2'd3: begin data3 <= wr_data; keep3 <= wr_keep; last3 <= wr_last; end
+					endcase
                 wr_ptr <= wr_ptr + 1;
             end
             if (rd_en && !empty) begin
+					case (rd_ptr)
+						 2'd0: begin rd_data <= data0; rd_keep <= keep0; rd_last <= last0; end
+						 2'd1: begin rd_data <= data1; rd_keep <= keep1; rd_last <= last1; end
+						 2'd2: begin rd_data <= data2; rd_keep <= keep2; rd_last <= last2; end
+						 2'd3: begin rd_data <= data3; rd_keep <= keep3; rd_last <= last3; end
+					endcase
                 rd_ptr <= rd_ptr + 1;
             end
-				if (wr_en && !full) count <= count + 1;
-				if (rd_en && !empty) count <= count - 1;
+				if (wr_en && !full && !(rd_en && !empty)) count <= count + 1;
+				if (rd_en && !empty && !(wr_en && !full)) count <= count - 1;
         end
     end
-
-    assign rd_valid = !empty;
-
-    assign rd_data = rd_valid ? data_mem[rd_ptr] : '0;
-    assign rd_keep = rd_valid ? keep_mem[rd_ptr] : '0;
-    assign rd_last = rd_valid ? last_mem[rd_ptr] : '0;
 
 endmodule
