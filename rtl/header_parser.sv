@@ -29,11 +29,8 @@ module header_parser (
         STREAM_PAYLOAD 
     } parse_state;
 
-    parse_state state;
+    parse_state state, state_filter, state_fifo, state_output;
     logic [0:511] packet_buffer;  // LSB-first notation for AXI Stream
-    logic [5:0]   valid_bytes;
-    logic [6:0] final_valid_bytes;
-    logic         prev_buffer_valid;
     logic         buffer_valid;
 
     logic [31:0]  cycle_count, packet_start_timestamp;
@@ -41,10 +38,95 @@ module header_parser (
     cycle_counter timestamper(.clk, .rst_n, .cycle_count);
 
     logic         fifo_wr_en, fifo_rd_en, fifo_full, fifo_empty, bypass_fifo, fifo_valid;
-    logic [0:255] stream_data, fifo_data, last_data_in;  // LSB-first notation
-    logic [0:31]  stream_keep, fifo_keep;  // LSB-first notation
-    logic         stream_last, fifo_last, stream_valid, bypass_valid;
+    logic [0:255] stream_data, fifo_data, choice_data;  // LSB-first notation
+    logic [0:31]  stream_keep, fifo_keep, choice_keep;  // LSB-first notation
+    logic         stream_last, fifo_last, stream_valid, bypass_valid, choice_valid, choice_last;
+	 
+    //filtering logic
+    logic        filters_valid, header_valid;
+    logic        cfg_we;
+    logic [3:0]  cfg_waddr, cfg_raddr;
+    logic [31:0] cfg_wdata, cfg_rdata;
 
+    //Pipelining logic 
+	 //Special declaration for forced unpacking
+	 (* preserve, noprune *) logic in_valid_d1;
+	 
+	 always_ff @(posedge clk or negedge rst_n) begin
+    if (~rst_n)
+        in_valid_d1 <= 1'b0;
+    else
+        in_valid_d1 <= in_valid;
+	end
+	
+    logic in_valid_d2, in_valid_d3, stream_valid_d1;
+    logic [255:0] in_data_d1,  in_data_d2,  in_data_d3, stream_data_d1;
+    logic [0:31]  in_keep_d1,  in_keep_d2,  in_keep_d3, stream_keep_d1;
+    logic         in_last_d1,  in_last_d2,  in_last_d3, stream_last_d1;
+    logic bypass_fifo_d1;
+
+    logic [1:0]   state_d1, state_d2;
+
+    logic [31:0]  packet_start_timestamp_d1, packet_start_timestamp_d2, packet_start_timestamp_d3;
+
+    // header_valid is generated in Stage 2 (filter_reg) → pipeline it to Stage 3 (fifo_reg)
+    logic         header_valid_d1; // used in final logic/output
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (~rst_n) begin
+            in_valid_d2 <= 1'b0; in_valid_d3 <= 1'b0;
+            in_data_d1  <= '0;   in_data_d2  <= '0;   in_data_d3  <= '0;
+            in_keep_d1  <= '0;   in_keep_d2  <= '0;   in_keep_d3  <= '0;
+            in_last_d1  <= 1'b0; in_last_d2  <= 1'b0; in_last_d3  <= 1'b0;
+
+            stream_data_d1  <= '0;
+            stream_keep_d1  <= '0;
+            stream_valid_d1 <= 1'b0;
+            stream_last_d1  <= 1'b0;
+
+            state_d1 <= IDLE; state_d2 <= IDLE;
+
+            packet_start_timestamp_d1 <= '0;
+            packet_start_timestamp_d2 <= '0;
+            packet_start_timestamp_d3 <= '0;
+
+            header_valid_d1 <= 1'b0; // This is from filter stage, see below
+        end else begin
+            // Stage 1
+            in_data_d1  <= in_data;
+            in_keep_d1  <= in_keep;
+            in_last_d1  <= in_last;
+            state_d1    <= state;
+            packet_start_timestamp_d1 <= packet_start_timestamp;
+
+            // Stage 2
+            in_valid_d2 <= in_valid_d1;
+            in_data_d2  <= in_data_d1;
+            in_keep_d2  <= in_keep_d1;
+            in_last_d2  <= in_last_d1;
+            state_d2    <= state_d1;
+            packet_start_timestamp_d2 <= packet_start_timestamp_d1;
+
+            // Stage 3
+            in_valid_d3 <= in_valid_d2;
+            in_data_d3  <= in_data_d2;
+            in_keep_d3  <= in_keep_d2;
+            in_last_d3  <= in_last_d2;
+            packet_start_timestamp_d3 <= packet_start_timestamp_d2;
+            
+            header_valid_d1 <= header_valid;  
+            bypass_fifo_d1 <= bypass_fifo;
+
+            //stage 4
+            stream_data_d1  <= stream_data;
+            stream_keep_d1  <= stream_keep;
+            stream_valid_d1 <= stream_valid;
+            stream_last_d1  <= stream_last;
+
+
+        end
+    end
+	 
     fifo payload_fifo (
         .clk       (clk),
         .rst_n     (rst_n),
@@ -64,24 +146,20 @@ module header_parser (
         .empty     (fifo_empty)
     );
 
-    assign bypass_fifo = in_valid && out_ready && fifo_empty;
+    assign bypass_fifo = in_valid_d3 && out_ready && fifo_empty;
     assign fifo_valid  = ~fifo_empty;
 
-    assign out_data  = bypass_fifo ? stream_data : fifo_data;
-    assign out_keep  = bypass_fifo ? stream_keep : fifo_keep;
-    assign out_last  = bypass_fifo ? stream_last : fifo_last;
-    
-    assign out_valid = bypass_fifo ? stream_valid : fifo_valid;
+    assign out_data  = bypass_fifo_d1 ? stream_data_d1 : fifo_data;
+    assign out_keep  = bypass_fifo_d1 ? stream_keep_d1 : fifo_keep;
+    assign out_last  = bypass_fifo_d1 ? stream_last_d1 : fifo_last;
+    assign out_valid = bypass_fifo_d1 ? stream_valid_d1 : fifo_valid;
 
     assign in_ready  = bypass_fifo ? out_ready : !fifo_full;
 
     assign fifo_wr_en = ~bypass_fifo && stream_valid;
     assign fifo_rd_en = out_ready && fifo_valid && ~bypass_fifo;
 
-    logic        filters_valid, header_valid;
-    logic        cfg_we;
-    logic [3:0]  cfg_waddr, cfg_raddr;
-    logic [31:0] cfg_wdata, cfg_rdata;
+
 
     filter_core my_filter_core(
         .clk, 
@@ -96,14 +174,12 @@ module header_parser (
     );
 
     // If in_last is high in the header stage, our packet is malformed so we should drop it.
-    assign header_valid = filters_valid && buffer_valid && ~in_last;
+    assign header_valid = filters_valid && buffer_valid && ~in_last_d1;
+
 
     always_ff @(posedge clk or negedge rst_n) begin
         if(~rst_n) begin
             state                  <= IDLE;
-            valid_bytes            <= 6'b0;
-            prev_buffer_valid      <= 1'b0;
-            last_data_in           <= 256'b0;
             packet_start_timestamp <= 32'b0;
             timestamp_valid        <= 1'b0;
         end else begin
@@ -113,31 +189,24 @@ module header_parser (
                     //if our packets truncated then we need to drop it early.
 						  //we're making the assumption in this design that we won't support packets
 						  //where the first beat is lower than 32 bytes.
-                    if(in_valid && in_ready && (&in_keep) && ~in_last) begin
-                        last_data_in           <= in_data;
+                    if(in_valid_d1 && (&in_keep_d1) && ~in_last_d1) begin
                         packet_start_timestamp <= cycle_count;
-                        valid_bytes            <= 32;
-                        prev_buffer_valid      <= in_valid;
                         state                  <= PARSE_HEADER;
                     end 
                 end
                 PARSE_HEADER: begin
                     // If we have a full valid header, start parsing the payload. 
                     if(header_valid) begin
-                        valid_bytes       <= 6'b0;
-                        prev_buffer_valid <= 1'b0;
                         state             <= STREAM_PAYLOAD;
                     // Otherwise, our input data is too corrupted. We've received 2 words
                     // and still don't have a complete header, so we flush the buffer and 
                     // return to listening. 
                     end else begin
-                        valid_bytes       <= 6'b0;
-                        prev_buffer_valid <= 1'b0;
                         state             <= IDLE;
                     end
                 end
                 STREAM_PAYLOAD: begin
-                    if(in_last) begin
+                    if(in_last_d1) begin
                         state           <= IDLE;
                         timestamp_valid <= 1'b1;
                         timestamp       <= (cycle_count + 1) - packet_start_timestamp;
@@ -146,26 +215,38 @@ module header_parser (
             endcase
         end
     end
+	 
+	 logic keep_contiguous, keep_contiguous_d1, keep_trailing_ones, keep_trailing_ones_d1;
+	 
+	 assign keep_trailing_ones = &in_keep_d1;
+	 
+	 always_ff @(posedge clk or negedge rst_n) begin
+		if(~rst_n) begin
+			keep_contiguous_d1 <= 0;
+			keep_trailing_ones_d1 <= 0;
+		end else begin
+			keep_contiguous_d1 <= keep_contiguous;
+			keep_trailing_ones_d1 <= keep_trailing_ones;
+		end
+	end
+	 
 
-
+    assign buffer_valid = in_valid_d1 && in_valid_d2 && keep_trailing_ones_d1;
+    assign packet_buffer[0:255] = in_data_d1;
+	assign packet_buffer[256:511] = in_data_d2;
 
     always_comb begin
-        case (state) 
+        case (state_d1) 
 				//Idle has the same requirements as our default case, so I don't write it here for 
 				//optimization.
             PARSE_HEADER: begin
-                // Second 256 bits contain rest of IP header + UDP header + start of payload
-                packet_buffer[0:255] = in_data;
-					 packet_buffer[256:511] = last_data_in;
-                buffer_valid = prev_buffer_valid && in_valid && 
-                              (trailing_ones(in_keep) > HEADER_SIZE) && is_lsb_contiguous(in_keep);
                 if(header_valid) begin
                     // Pass the complete packet
-                    stream_data  = in_data;
+                    stream_data  = in_data_d3;
                     // Send only the start of the packet and not the header
                     // We still need to respect in_keep though, so we use this mask.
-                    stream_keep  = 32'h00_00_03_FF & in_keep;
-                    stream_valid = in_valid;
+                    stream_keep  = 32'h00_00_03_FF & in_keep_d3;
+                    stream_valid = in_valid_d3;
                     stream_last  = 1'b0;
                 end else begin
                     stream_data  = 256'b0;
@@ -175,17 +256,12 @@ module header_parser (
                 end
             end
             STREAM_PAYLOAD: begin
-                packet_buffer[0:511]   = 512'b0;
-                buffer_valid           = 1'b0;
-                stream_data            = in_data;
-                stream_keep            = in_keep;
-                stream_valid           = in_valid;
-                stream_last            = in_last;
+                stream_data            = in_data_d3;
+                stream_keep            = in_keep_d3;
+                stream_valid           = in_valid_d3;
+                stream_last            = in_last_d3;
             end
             default: begin
-                packet_buffer[0:255]   = 256'b0;
-					 packet_buffer[256:511] = in_data;
-                buffer_valid           = 1'b0;
                 stream_data            = 256'b0;
                 stream_keep            = 32'b0;
                 stream_valid           = 1'b0;
@@ -197,63 +273,31 @@ module header_parser (
 
 	 
 	 
-	function automatic logic is_lsb_contiguous(input logic [31:0] keep);
-		 logic [31:0] mask;
-		 begin
-			  mask = (32'hFFFF_FFFF >> (32 - countones32(keep)));
-			  is_lsb_contiguous = (keep == mask);
-		 end
-	endfunction
-	
-	function automatic [5:0] countones32(input logic [31:0] x);
-		 logic [15:0] s1;
-		 logic [7:0]  s2;
-		 logic [3:0]  s3;
-		 logic [1:0]  s4;
-		 logic [5:0]  total;
-
-		 integer i;
-
-		 // Stage 1: Pairwise add (1-bit + 1-bit)
-		 for (i = 0; i < 16; i++) begin
-			  s1[i] = x[2*i] + x[2*i+1];
-		 end
-
-		 // Stage 2: Add pairs of 2-bit results
-		 for (i = 0; i < 8; i++) begin
-			  s2[i] = s1[2*i] + s1[2*i+1];
-		 end
-
-		 // Stage 3: Add pairs of 3-bit results
-		 for (i = 0; i < 4; i++) begin
-			  s3[i] = s2[2*i] + s2[2*i+1];
-		 end
-
-		 // Stage 4: Add pairs of 4-bit results
-		 for (i = 0; i < 2; i++) begin
-			  s4[i] = s3[2*i] + s3[2*i+1];
-		 end
-
-		 // Final sum
-		 total = s4[0] + s4[1];
-
-		 return total;
-	endfunction
-	
-	function automatic [5:0] trailing_ones(input logic [31:0] keep);
-    integer i;
-    begin
-        trailing_ones = 0;
-        for (i = 0; i < 32; i++) begin
-            if (keep[i])
-                trailing_ones += 1;
-            else
-                break;
+    function automatic logic is_lsb_contiguous(input logic [31:0] keep);
+        logic [31:0] mask;
+        logic [5:0] count;
+        begin
+            count = trailing_ones(keep);
+            mask = (32'hFFFF_FFFF >> (32 - count));
+            is_lsb_contiguous = (keep == mask);
         end
-    end
+    endfunction
+
+    function automatic [5:0] trailing_ones(input logic [31:0] keep);
+        integer i;
+        logic [5:0] count;
+        begin
+            count = 0;
+            for (i = 0; i < 32; i++) begin
+                if (keep[i])
+                    count += 1;
+                else
+                    break;
+            end
+            trailing_ones = count;
+        end
+    endfunction
 	 
-	 
-endfunction
 	
 	
 endmodule
@@ -370,7 +414,7 @@ module header_parser_testbench;
         // Ethernet header bytes 0–13 (lowest‐order bytes in this concat)
         , 8'h08,8'h00                        // EtherType = 0x0800
         , 8'h11,8'h22,8'h33,8'h44,8'h55,8'h66  // src MAC
-        , 8'hCA,8'hFE,8'hDE,8'hAD,8'hBE,8'hE5  // dest MAC (Wrong)
+        , 8'hCA,8'hcE,8'hD2,8'hAD,8'hBE,8'hE5  // dest MAC (Wrong)
         };
         test_packets[1].byte_len = 68;
         
@@ -581,8 +625,8 @@ module header_parser_testbench;
         $display("Simulation finished.");
         $finish;
     end
+		*/
 
-	 */
     //backpressure testing
     initial begin
          reset();

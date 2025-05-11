@@ -71,4 +71,13 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT -secti
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name SDC_FILE timing/latencytest.sdc
 set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+
+#Fitting improvement for timing
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to _col10
+#set_location_assignment FF_X142_Y89_N22 -to _col10
+#set_location_assignment PIN_AG13 -to in_valid
+
+set_location_assignment FF_X143_Y89_N59 -to in_valid_d1
+set_location_assignment FF_X143_Y91_N46 -to in_valid_d2
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

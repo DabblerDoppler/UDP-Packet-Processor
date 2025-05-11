@@ -25,7 +25,7 @@ module filter_core(
     // ip_header_length by 4, so it's really 5 or greater.
     localparam HEADER_LENGTH = 5;
     
-    logic        eth_valid, last_eth_valid, ip_valid, udp_valid;
+    logic        eth_valid, ip_valid, udp_valid;
     logic [47:0] cfg_local_mac;
     logic [15:0] cfg_ethertype;
 
@@ -51,12 +51,9 @@ module filter_core(
     );
 
     
-    assign last_eth_valid = (data[464:479]  == cfg_local_mac[47:32] && // partial matching for validation
+    assign eth_valid = (data[464:479]  == cfg_local_mac[47:32] && // partial matching for validation
                         data[400:415] == cfg_ethertype);        // bytes 12-13
-								
-	 always @(posedge clk) begin
-		eth_valid <= last_eth_valid;
-	 end
+						
 								
 	 
     
