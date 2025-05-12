@@ -2,53 +2,53 @@
 do runlab.do
 # ** Warning: (vlib-34) Library already exists at "work".
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:17:24 on May 10,2025
+# Start time: 16:22:42 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/cycle_counter.sv 
 # -- Compiling module cycle_counter
 # 
 # Top level modules:
 # 	cycle_counter
-# End time: 16:17:24 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:22:42 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:17:24 on May 10,2025
+# Start time: 16:22:42 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/fifo.sv 
 # -- Compiling module fifo
 # 
 # Top level modules:
 # 	fifo
-# End time: 16:17:24 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:22:42 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:17:24 on May 10,2025
+# Start time: 16:22:42 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/filter_config.sv 
 # -- Compiling module filter_config
 # 
 # Top level modules:
 # 	filter_config
-# End time: 16:17:24 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:22:42 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:17:24 on May 10,2025
+# Start time: 16:22:42 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/filter_core.sv 
 # -- Compiling module filter_core
 # 
 # Top level modules:
 # 	filter_core
-# End time: 16:17:24 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:22:42 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:17:24 on May 10,2025
+# Start time: 16:22:42 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/header_parser.sv 
 # -- Compiling module header_parser
 # -- Compiling module header_parser_testbench
 # 
 # Top level modules:
 # 	header_parser_testbench
-# End time: 16:17:24 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:22:42 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -voptargs="+acc" work.header_parser_testbench 
-# Start time: 16:17:24 on May 10,2025
+# Start time: 16:22:43 on May 12,2025
 # Loading sv_std.std
 # Loading work.header_parser_testbench
 # Loading work.header_parser
@@ -57,63 +57,62 @@ do runlab.do
 # Loading work.filter_core
 # Loading work.filter_config
 # Simulation finished.
-# ** Note: $finish    : ../rtl/header_parser.sv(623)
-#    Time: 255 ps  Iteration: 1  Instance: /header_parser_testbench
+# ** Note: $finish    : ../rtl/header_parser.sv(643)
+#    Time: 205 ps  Iteration: 1  Instance: /header_parser_testbench
 # 1
-# Break in Module header_parser_testbench at ../rtl/header_parser.sv line 623
-# WARNING: No extended dataflow license exists
+# Break in Module header_parser_testbench at ../rtl/header_parser.sv line 643
 do runlab.do
 # ** Warning: (vlib-34) Library already exists at "work".
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:18:48 on May 10,2025
+# Start time: 16:24:37 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/cycle_counter.sv 
 # -- Compiling module cycle_counter
 # 
 # Top level modules:
 # 	cycle_counter
-# End time: 16:18:48 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:24:37 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:18:48 on May 10,2025
+# Start time: 16:24:37 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/fifo.sv 
 # -- Compiling module fifo
 # 
 # Top level modules:
 # 	fifo
-# End time: 16:18:48 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:24:37 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:18:48 on May 10,2025
+# Start time: 16:24:37 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/filter_config.sv 
 # -- Compiling module filter_config
 # 
 # Top level modules:
 # 	filter_config
-# End time: 16:18:48 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:24:37 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:18:48 on May 10,2025
+# Start time: 16:24:37 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/filter_core.sv 
 # -- Compiling module filter_core
 # 
 # Top level modules:
 # 	filter_core
-# End time: 16:18:48 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:24:37 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 16:18:48 on May 10,2025
+# Start time: 16:24:37 on May 12,2025
 # vlog -reportprogress 300 -sv ../rtl/header_parser.sv 
 # -- Compiling module header_parser
 # -- Compiling module header_parser_testbench
 # 
 # Top level modules:
 # 	header_parser_testbench
-# End time: 16:18:48 on May 10,2025, Elapsed time: 0:00:00
+# End time: 16:24:37 on May 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# End time: 16:18:51 on May 10,2025, Elapsed time: 0:01:27
-# Errors: 0, Warnings: 1
+# End time: 16:24:38 on May 12,2025, Elapsed time: 0:01:55
+# Errors: 0, Warnings: 0
 # vsim -voptargs="+acc" work.header_parser_testbench 
-# Start time: 16:18:51 on May 10,2025
+# Start time: 16:24:38 on May 12,2025
 # Loading sv_std.std
 # Loading work.header_parser_testbench
 # Loading work.header_parser
@@ -122,9 +121,9 @@ do runlab.do
 # Loading work.filter_core
 # Loading work.filter_config
 # Simulation finished.
-# ** Note: $finish    : ../rtl/header_parser.sv(623)
+# ** Note: $finish    : ../rtl/header_parser.sv(625)
 #    Time: 255 ps  Iteration: 1  Instance: /header_parser_testbench
 # 1
-# Break in Module header_parser_testbench at ../rtl/header_parser.sv line 623
-# End time: 16:55:55 on May 10,2025, Elapsed time: 0:37:04
+# Break in Module header_parser_testbench at ../rtl/header_parser.sv line 625
+# End time: 16:25:26 on May 12,2025, Elapsed time: 0:00:48
 # Errors: 0, Warnings: 0

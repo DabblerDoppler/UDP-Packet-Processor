@@ -1,6 +1,16 @@
 # UDP Packet Processor
 
-A high-performance UDP header parser using a 256-bit AXI input stream. Designed with low latency for High-Frequency Trading (HFT) applications.
+A high-performance UDP header parser using a 256-bit AXI input stream. Designed for low latency as a resume project for High-Frequency Trading (HFT) applications.
+
+## Project Goals
+
+- Explore placement-aware pipelining and high-speed I/O constraints
+- Demonstrate competence in:
+  - SystemVerilog RTL design
+  - Timing analysis and STA debugging
+  - Tcl scripting in Quartus
+  - Manual and automated floorplanning
+  - Performance tuning for HFT-class systems
 
 ## Features
 
@@ -17,17 +27,16 @@ A high-performance UDP header parser using a 256-bit AXI input stream. Designed 
 The UDP Packet Processor consists of the following key components:
 - Header Parser
 - Packet Filter
-- Output Buffer
+- Output FIFO
 
 ## Performance Metrics
 
 | Metric | Value |
 |--------|-------|
-| Maximum Clock Frequency (Slow 900mV 100C Model) | X MHz |
-| Latency (min) | X clock cycles |
-| Latency (max) | X clock cycles |
+| Maximum Clock Frequency (Slow 900mV 100C Model) | 251 MHz |
+| Latency | 4 clock cycles, ~15.9 ns  |
 | Resource Utilization | X LUTs, X FFs, X BRAMs |
-| Throughput | 94.4 Gbps |
+| Throughput | ~64.3 Gbps |
 
 ## Simulation and Verification
 
@@ -35,10 +44,7 @@ The design has been verified using:
 - Integration tests for the complete system
 - Directed test cases for edge conditions
 
-## Implementation Results
-
-The design has been synthesized for Arria 10 10AX115S2F45I2SG with the following results:
-- [Include timing, area, and power results]
+Full verification was not a priority for this project. I intend for my next project to focus on UVM methodologies, and I wanted to hone in on timing for this one.
 
 
 ## License

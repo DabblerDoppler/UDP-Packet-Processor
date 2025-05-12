@@ -1,17 +1,57 @@
-**AXI-Stream Header Parser Timing Optimization Report**
+**AXI-Stream Header Parser Project Report**
 
-**Overview**  
-This document outlines the challenges, methodologies, and results of timing optimization for a 256-bit AXI-Stream header parser implemented on Intel's Arria 10 FPGA. The project was developed as a resume portfolio item, with the intent of demonstrating deep understanding of pipelining, timing closure, floorplanning, and synthesis control relevant to high-frequency trading (HFT) hardware applications.
+**Overview** This document outlines the challenges, methodologies, and results of timing optimization for a 256-bit AXI-Stream header parser implemented on Intel's Arria 10 FPGA. The project was developed as a resume portfolio item, with the intent of demonstrating deep understanding of pipelining, timing closure, floorplanning, and synthesis control relevant to high-frequency trading (HFT) hardware applications.
 
 ---
 
 **Design Summary**
+
 - **Target Platform**: Intel Arria 10
 - **Input Interface**: AXI-Stream, 256-bit width, LSB-first
 - **Pipeline Depth**: 4 stages
 - **Functional Goal**: Parse Ethernet/IP/UDP headers and timestamp incoming packets
 - **Target FMax**: 350 MHz aspirational, >250 MHz required
 - **Achieved FMax**: 251 MHz
+
+---
+
+**Early Design Strategy**
+
+The initial implementation was deliberately kept purely combinational, with no pipeline registers, in order to make critical path bottlenecks visible early and to provide flexibility for inserting pipeline stages only where required. This clean separation allowed for cleaner timing budgeting and more deterministic pipelining of the header parsing and filter logic. Once bottlenecks became apparent, registers were introduced incrementally at clean stage boundaries.
+
+This allowed:
+
+- Clear visibility into logic delay without stage overlap
+- Clean insertion of register boundaries between parsing, filtering, and control
+- Precise alignment between FSM states and data validity
+
+---
+
+**Architecture and Pipeline Register Diagram**
+
+![Architecture Diagram](images/architecture.jpg)
+![Pipeline Diagram](images/pipeline.jpg)
+
+
+The 4-stage pipeline is broken down as follows:
+
+1. **Stage 1 - Input Registering**:
+   - Input AXI-Stream signals (`in_data`, `in_keep`, `in_valid`, `in_last`) are registered into `*_d1` form.
+   - Used to compute preliminary header-related values such as `buffer_valid`.
+
+2. **Stage 2 - Header Analysis**:
+   - Header information is assembled across two beats and passed to the filter logic.
+   - `header_valid` is generated combinationally in this stage.
+
+3. **Stage 3 - FSM and Stream Data Construction**:
+   - FSM processes `header_valid` and determines next state (STREAM_PAYLOAD or flush).
+   - `stream_*` outputs are generated for either FIFO or bypass logic.
+
+4. **Stage 4 - Output Registering**:
+   - `stream_*` outputs are registered.
+   - Output mux logic selects between FIFO and stream pipeline paths.
+
+This breakdown ensures clear separation of compute, control, and flow logic, enabling modular timing optimization and simplifying RTL debug.
 
 ---
 
@@ -23,7 +63,7 @@ This document outlines the challenges, methodologies, and results of timing opti
 
 2. **Timing Analysis Failures on Virtual Outputs**
    - Output pins (e.g., `out_valid`) were showing up as critical paths in reports, despite not being relevant to internal pipeline timing.
-   - Attempts to apply `set_output_delay 0` were partially ineffective.
+   - Attempts to apply `set_output_delay 0` gave me trouble - I ended up setting these as false paths.
 
 3. **FSM and Header Alignment Issues**
    - The FSM used for packet parsing depended on `header_valid`, which was generated 2 pipeline stages later, causing timing and alignment ambiguity.
@@ -86,17 +126,27 @@ In an effort to further refine placement and squeeze out additional MHz, manual 
 - LogicLock regions in Standard Edition do not enforce fixed placement without additional per-instance `PLACEMENT_LOCK` commands
 - Post-fit netlist interaction is limited; verifying true register placement programmatically is cumbersome
 
-Ultimately, the project encountered diminishing returns from further hand-optimization due to these tool limitations. Quartus Standard is not designed for fine-grained physical tuning, and a Pro license would be required for more advanced floorplanning, automated region locking, or fitter-guided placement optimization.
+Additionally, even with ideal manual placement, some input-to-register paths (e.g., `in_keep[29] → in_keep_d1[27]`) still exhibited 3.2–3.5 ns delays due to IO buffer architecture and routing on Arria 10. These delays are near the edge of what is tolerable for a 350 MHz clock (2.86 ns period), making the original FMax target impractical on this device without risking unstable timing. A board with faster IO support, such as a Stratix 10, would be more appropriate for 350+ MHz applications.
+
+Ultimately, given diminishing returns and hardware limits, the final design was fixed at 251 MHz.
 
 ---
 
-**Next Steps / Optional Enhancements**
-- Export slack and seed per run to CSV
-- Add hierarchical LogicLock regions for larger designs
-- Improve latency modeling for timestamping accuracy
-- Push for >300 MHz by hand-placing critical pipeline paths
+**Test Coverage and Validation**
+
+![Backpresure Test Waveform](images/backpressuretest.png)
+![Filter Test Waveform](images/filterstest.png)
+
+Test cases included:
+- Full 2-word AXI-Stream headers with valid/invalid `keep` patterns
+- Early `in_last` termination (short packet)
+- Proper FIFO bypass activation when out_ready is high
+- Packets dropped when malformed header detected
+- Filtering tests using `filter_core` configuration registers
+
+Each scenario was verified in ModelSim using waveform captures to confirm FSM state transitions and output behavior.
+
 
 ---
 
-**Conclusion**  
-This project demonstrates the full optimization loop of a high-performance packet processing module, from RTL through fitter timing closure. It showcases an understanding of pipelining, synchronization, floorplanning, slack debugging, Quartus scripting, and build reproducibility — all of which are relevant for timing-critical FPGA applications such as HFT.
+**Conclusion** This project demonstrates the full optimization loop of a high-performance packet processing module, from RTL through fitter timing closure. It greatly improved my understanding of pipelining, synchronization, floorplanning, slack debugging, Quartus scripting, and build reproducibility.
