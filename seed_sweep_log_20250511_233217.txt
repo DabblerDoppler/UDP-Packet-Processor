@@ -1,0 +1,1716 @@
+Info: *******************************************************************
+Info: Running Quartus Prime Shell
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:32:18 2025
+Info: Command: quartus_sh -t tcl\sweep_seeds_and_lock.tcl
+>>> INFO: Running inside Quartus GUI Tcl Console
+
+>>> INFO: Starting seed sweep for 10 seeds...
+
+--------------------------------------------
+>>> SEED: Running seed 1
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 1...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 1 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:38:18 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Sun May 11 23:38:18 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+>>> UPDATE: New best seed = 1 (slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:38:18 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Sun May 11 23:38:18 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00)
+--------------------------------------------
+>>> SEED: Running seed 2
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 2...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 2 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:43:55 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4620 megabytes
+    Info: Processing ended: Sun May 11 23:43:55 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+>>> UPDATE: New best seed = 2 (slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:43:55 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4620 megabytes
+    Info: Processing ended: Sun May 11 23:43:55 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00)
+--------------------------------------------
+>>> SEED: Running seed 3
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 3...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 3 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:48:35 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4620 megabytes
+    Info: Processing ended: Sun May 11 23:48:36 2025
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00
+>>> UPDATE: New best seed = 3 (slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:48:35 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4620 megabytes
+    Info: Processing ended: Sun May 11 23:48:36 2025
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00)
+--------------------------------------------
+>>> SEED: Running seed 4
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 4...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 4 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:53:58 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Sun May 11 23:53:59 2025
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00
+>>> UPDATE: New best seed = 4 (slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:53:58 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Sun May 11 23:53:59 2025
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00)
+--------------------------------------------
+>>> SEED: Running seed 5
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 5...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 5 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Mon May 12 00:00:52 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Mon May 12 00:00:52 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+--------------------------------------------
+>>> SEED: Running seed 6
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 6...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 6 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Mon May 12 00:07:02 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Mon May 12 00:07:02 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+--------------------------------------------
+>>> SEED: Running seed 7
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 7...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 7 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Mon May 12 00:12:29 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Mon May 12 00:12:30 2025
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00
+--------------------------------------------
+>>> SEED: Running seed 8
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 8...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 8 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Mon May 12 00:18:48 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Mon May 12 00:18:48 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+--------------------------------------------
+>>> SEED: Running seed 9
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 9...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 9 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Mon May 12 00:24:58 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Mon May 12 00:24:58 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+--------------------------------------------
+>>> SEED: Running seed 10
+--------------------------------------------
+>>> STEP 1: Synthesizing...
+>>> STEP 2: Fitting seed 10...
+>>> STEP 3: Running STA...
+>>> RESULT: Seed 10 slack = Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Mon May 12 00:30:31 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Mon May 12 00:30:31 2025
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+
+>>> SUMMARY: Best seed is 4 with slack Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 24.1std.0 Build 1077 03/04/2025 SC Standard Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun May 11 23:53:58 2025
+Info: Command: quartus_sta -t tcl/get_slack_temp.tcl
+PANEL: Flow Summary
+PANEL: Flow Settings
+PANEL: Flow Non-Default Global Settings
+PANEL: Flow Elapsed Time
+PANEL: Flow OS Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Summary
+PANEL: Analysis & Synthesis||Settings||Analysis & Synthesis Settings
+PANEL: Analysis & Synthesis||Parallel Compilation
+PANEL: Analysis & Synthesis||Analysis & Synthesis Source Files Read
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Usage Summary
+PANEL: Analysis & Synthesis||Analysis & Synthesis Resource Utilization by Entity
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d2
+PANEL: Analysis & Synthesis||State Machines||State Machine - |header_parser|state_d1
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Protected by Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Registers Removed During Synthesis
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||Removed Registers Triggering Further Register Optimizations
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Register Statistics||General Register Statistics
+PANEL: Analysis & Synthesis||Analysis & Synthesis Optimization Results||Multiplexer Statistics||Multiplexer Restructuring Statistics (Restructuring Performed)
+PANEL: Analysis & Synthesis||Source Assignments||Source assignments for Top-level Entity: |header_parser
+PANEL: Analysis & Synthesis||Parameter Settings by Entity Instance||Parameter Settings for User Entity Instance: fifo:payload_fifo
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core|filter_config:my_configuration"
+PANEL: Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "filter_core:my_filter_core"
+PANEL: Analysis & Synthesis||Post-Synthesis Netlist Statistics for Top Partition
+PANEL: Analysis & Synthesis||Elapsed Time Per Partition
+PANEL: Fitter||Fitter Summary
+PANEL: Fitter||Fitter Settings
+PANEL: Fitter||Parallel Compilation
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Summary
+PANEL: Fitter||Estimated Delay Added for Hold Timing||Estimated Delay Added for Hold Timing Details
+PANEL: Fitter||Fitter Netlist Optimizations
+PANEL: Fitter||Ignored Assignments
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Preservation Summary
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Partition Settings
+PANEL: Fitter||Fitter Incremental Compilation Section||Incremental Compilation Placement Preservation
+PANEL: Fitter||Resource Section||Fitter Resource Usage Summary
+PANEL: Fitter||Resource Section||Fitter Partition Statistics
+PANEL: Fitter||Resource Section||Input Pins
+PANEL: Fitter||Resource Section||Output Pins
+PANEL: Fitter||Resource Section||I/O Bank Usage
+PANEL: Fitter||Resource Section||All Package Pins
+PANEL: Fitter||Resource Section||I/O Standards Section||I/O Assignment Warnings
+PANEL: Fitter||Resource Section||Fitter Resource Utilization by Entity
+PANEL: Fitter||Resource Section||Delay Chain Summary
+PANEL: Fitter||Resource Section||Control Signals
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Summary
+PANEL: Fitter||Resource Section||Global & Other Fast Signals Details
+PANEL: Fitter||Resource Section||Logic and Routing Section||Routing Usage Summary
+PANEL: Fitter||Resource Section||Fitter HSLP Summary
+PANEL: Fitter||Fitter Device Options
+PANEL: Fitter||Operating Settings and Conditions
+PANEL: Timing Analyzer||Timing Analyzer Summary
+PANEL: Timing Analyzer||Parallel Compilation
+PANEL: Timing Analyzer||SDC File List
+PANEL: Timing Analyzer||Clocks
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV 100C Model||Slow 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Fmax Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Slow 900mV -40C Model||Slow 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV 100C Model||Fast 900mV 100C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Setup Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Hold Summary
+PANEL: Timing Analyzer||Fast 900mV -40C Model||Fast 900mV -40C Model Minimum Pulse Width Summary
+PANEL: Timing Analyzer||Multicorner Timing Analysis Summary
+PANEL: Timing Analyzer||Advanced I/O Timing||Board Trace Model Assignments
+PANEL: Timing Analyzer||Advanced I/O Timing||Input Transition Times
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Slow 900mv 100c Model)
+PANEL: Timing Analyzer||Advanced I/O Timing||Signal Integrity Metrics||Signal Integrity Metrics (Fast 900mv n40c Model)
+PANEL: Timing Analyzer||Clock Transfers||Setup Transfers
+PANEL: Timing Analyzer||Clock Transfers||Hold Transfers
+PANEL: Timing Analyzer||Unconstrained Paths||Unconstrained Paths Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Clock Status Summary
+PANEL: Timing Analyzer||Unconstrained Paths||Setup Analysis||Unconstrained Output Ports
+PANEL: Timing Analyzer||Unconstrained Paths||Hold Analysis||Unconstrained Output Ports
+WARNING: 'Timing Analyzer Summary' panel not found. Slack unavailable.
+N/A
+Info (23030): Evaluation of Tcl script tcl/get_slack_temp.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4617 megabytes
+    Info: Processing ended: Sun May 11 23:53:59 2025
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00.
+>>> ACTION: Re-fitting best seed and locking placement...
+>>> FINAL: Re-synthesizing best seed...
+>>> FINAL: Re-fitting...
+>>> FINAL: STA...
+>>> FINAL: Exporting assignments...
+------------------------------------------------
+Error (23024): Unknown long option --export_assignments. Refer to --help for legal options
+
+Usage:
+------
+
+quartus_cdb [-h | --help[=<option|topic>] | -v]
+quartus_cdb <project name> [<options>]
+quartus_cdb -t <script file> [<script args>]
+quartus_cdb -s
+quartus_cdb --tcl_eval <tcl command>
+child process exited abnormally
+    while executing
+"exec quartus_cdb $project_name -c $revision_name --export_assignments=$lock_file"
+    (file "tcl\sweep_seeds_and_lock.tcl" line 102)
+------------------------------------------------
+Error (23031): Evaluation of Tcl script tcl\sweep_seeds_and_lock.tcl unsuccessful
+Error: Quartus Prime Shell was unsuccessful. 1 error, 0 warnings
+    Error: Peak virtual memory: 4633 megabytes
+    Error: Processing ended: Mon May 12 00:35:48 2025
+    Error: Elapsed time: 01:03:30
+    Error: Total CPU time (on all processors): 00:00:01

@@ -60,8 +60,8 @@ module header_parser (
 	end
 	
     logic in_valid_d2, in_valid_d3, stream_valid_d1;
-    logic [255:0] in_data_d1,  in_data_d2,  in_data_d3, stream_data_d1;
-    logic [0:31]  in_keep_d1,  in_keep_d2,  in_keep_d3, stream_keep_d1;
+    logic [0:255] in_data_d1,  in_data_d2,  in_data_d3, stream_data_d1;
+    logic [31:0]  in_keep_d1,  in_keep_d2,  in_keep_d3, stream_keep_d1;
     logic         in_last_d1,  in_last_d2,  in_last_d3, stream_last_d1;
     logic bypass_fifo_d1;
 
