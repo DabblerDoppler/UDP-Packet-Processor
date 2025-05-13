@@ -22,7 +22,7 @@ A high-performance UDP header parser using a 256-bit AXI input stream. Designed 
 
 ## Architecture
 
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](doc/images/architecture.png)
 
 The UDP Packet Processor consists of the following key components:
 - Header Parser
